@@ -10,6 +10,7 @@ import {
 } from "@/components/ui/table"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
+import { PatientDeleteCell } from "@/components/patients/patient-delete-cell"
 import { bloodGroupLabels, patientStatusLabels } from "@/lib/labels"
 import { calculateAge, initials, patientDisplayName } from "@/lib/format"
 
@@ -31,6 +32,7 @@ export function PatientTable({ patients }: { patients: Patients }) {
           <TableHead>Blood Group</TableHead>
           <TableHead>Tags</TableHead>
           <TableHead>Status</TableHead>
+          <TableHead className="w-10" />
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -67,6 +69,9 @@ export function PatientTable({ patients }: { patients: Patients }) {
               <Badge variant={patient.status === "ACTIVE" ? "default" : "secondary"}>
                 {patientStatusLabels[patient.status]}
               </Badge>
+            </TableCell>
+            <TableCell>
+              <PatientDeleteCell patientId={patient.id} patientName={patientDisplayName(patient)} />
             </TableCell>
           </TableRow>
         ))}
